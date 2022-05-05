@@ -6,7 +6,7 @@ import Colors from '../constants/Colors';
 import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
 
-function StartGameScreen () {
+const StartGameScreen = ({ onStartGame }) => {
 
 const [enteredValue, setEnteredValue] = useState('');
 const [confirmed, setConfirmed] = useState(false);
@@ -39,6 +39,10 @@ if(confirmed){
         <NumberContainer>
             {selectedNumber}
         </NumberContainer>
+        <Button 
+            title='Ready to start game?'
+            onPress={ () => onStartGame(selectedNumber) }
+        />
     </Card>
     )
 }
@@ -59,10 +63,18 @@ if(confirmed){
                 />
                 <View style={styles.buttonContainer}>
                 <View style={styles.button}>
-                    <Button style={styles.button} title="Reset" color={Colors.secondary} onPress={resetInputHandler}/>
+                        <Button 
+                        title="Reset" 
+                        color={Colors.secondary} 
+                        onPress={resetInputHandler}
+                    />
                     </View>
                     <View style={styles.button}>
-                    <Button style={styles.button} title="Confirm" color={Colors.primary} onPress={confirmInputHandler}/>
+                        <Button 
+                        title="Confirm" 
+                        color={Colors.primary} 
+                        onPress={confirmInputHandler}
+                    />
                 </View>
             </View>
         </Card>
@@ -86,19 +98,6 @@ const styles = StyleSheet.create({
     title:{
         fontSize: 20,
         marginVertical: 10,
-    },
-    inputContainer:{
-        width: 300,
-        maxWidth: '80%',
-        alignItems: 'center',
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: .26,
-        shadowRadius: 6,
-        backgroundColor: 'white',
-        elevation: 5,
-        padding: 20,
-        borderRadius: 10
     },
     button:{
        width: 100

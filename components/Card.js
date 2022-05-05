@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
 
 const Card = ({children, style}) => {
   return (
-    <View style = {[styles.card]}>{children}</View>
+  <View style={[styles.card]}>{children}</View>
   )
 }
 
