@@ -37,6 +37,20 @@ const GameScreen = ({selectedNumber}) => {
             return
         }
 
+        if(direction === Constants.direction.lower) {
+            currentHigh.current = currentGuess;
+
+        }else{
+            currentLow.current = currentGuess;
+        }
+
+        const nextNum = generateRandomBetween(currentLow.current, currentHigh.current, currentGuess);
+        setCurrentGuess(nextNum);
+
+        if(nextNum === selectedNumber){
+            alert('You won!!!!')
+        }
+
     }
 
   return (
