@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import Card from '../components/Card';
 import NumberContainer from '../components/NumberContainer';
 import GameOverScreen from './GameOverScreen';
-import Constants from '../constants/constants';
+import { direction_ as importedDirection } from '../constants/constants';
 
 const generateRandomBetween = ( min, max, exclude ) => {
     min = Math.ceil(min);
@@ -38,14 +38,14 @@ const GameScreen = ({selectedNumber, onGameOver}) => {
 
     const nextGuess = direction => {
 
-        if( (direction === Constants.direction.higher && currentGuess > selectedNumber ) || 
-        (direction === Constants.direction.lower && currentGuess < selectedNumber )) {
+        if( (direction === importedDirection.higher && currentGuess > selectedNumber ) || 
+        (direction === importedDirection.lower && currentGuess < selectedNumber )) {
            // Alert('Pls don\t lie, You know that\s wrong', [{ text: 'Sorry', style: 'cancel'}])
            alert('Pls don\'t lie')
             return
         }
 
-        if(direction === Constants.direction.lower) {
+        if(direction === importedDirection.lower) {
             currentHigh.current = currentGuess;
 
         }else{
@@ -62,8 +62,8 @@ const GameScreen = ({selectedNumber, onGameOver}) => {
         <Text>Computer Guess: </Text>
         <NumberContainer>{currentGuess}</NumberContainer>
         <Card style={styles.buttonContainer}>
-            <Button title='Lower' onPress={ () => { nextGuess(Constants.direction.lower) } } />
-            <Button title='Higher' onPress={ () => { nextGuess(Constants.direction.higher) } } />
+            <Button title='Lower' onPress={ () => { nextGuess(importedDirection.lower) } } />
+            <Button title='Higher' onPress={ () => { nextGuess(importedDirection.higher) } } />
         </Card>
     </View>
   )

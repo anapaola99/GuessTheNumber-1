@@ -9,7 +9,7 @@ import StartGameScreen from './screens/StartGameScreen';
 export default function App() {
 
   const [selectedNumber, setSelectedNumber] = useState(undefined);
-  const [numberOfGuesses, setNumberOfGuesses] = useState(0)
+  const [numberOfGuesses, setNumberOfGuesses] = useState(0);
 
   const gameOverHandler=  (rounds) => {
     setNumberOfGuesses(rounds)
@@ -19,12 +19,17 @@ export default function App() {
     setSelectedNumber(number);
   }
 
+  const restartGame = () => {
+    setNumberOfGuesses(0)
+    setSelectedNumber(undefined)
+  }
+
   let content =  <StartGameScreen onStartGame = {StartGameHandler}/>
 
   if( selectedNumber && numberOfGuesses === 0 ) {
     content = <GameScreen selectedNumber={selectedNumber} onGameOver = {gameOverHandler} />;
   }else if (selectedNumber && numberOfGuesses > 0 ) {
-    content = <GameOverScreen rounds = {numberOfGuesses}/>
+    content = <GameOverScreen rounds = {numberOfGuesses} onGameRestart={restartGame}/>
   }
 
   return (
@@ -34,8 +39,6 @@ export default function App() {
     </View>
   );
 }
-
-
 
 const styles = StyleSheet.create({
   screen: {

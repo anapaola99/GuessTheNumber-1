@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-import Card from '../components/Card'
+import Card from '../components/Card';
 import Colors from '../constants/Colors';
 import Input from '../components/Input';
 import NumberContainer from '../components/NumberContainer';
+
+import { globalIndexes as limit } from '../constants/constants'
+import { useFetchPokemon } from '../hooks/useFetchPokemon';
 
 const StartGameScreen = ({ onStartGame }) => {
 
 const [enteredValue, setEnteredValue] = useState('');
 const [confirmed, setConfirmed] = useState(false);
 const [selectedNumber, setSelectedNumber] = useState(undefined);
+const [name, setName] = useState(undefined);
 
 const numberInputHandler = input => {
     setEnteredValue(input.replace(/[^0-9]/g, ''));
@@ -23,11 +27,17 @@ const resetInputHandler = input => {
 
 const confirmInputHandler = () => {
     const chosenNumber = parseInt(enteredValue);
-    if(isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) return
+    if(isNaN(chosenNumber) || chosenNumber <= limit.MIN_INDEX || chosenNumber > limit.MAX_INDEX) return
 
     setConfirmed(true)
     setSelectedNumber(chosenNumber)
     setEnteredValue('')
+    setPokemon()
+}
+
+const setPokemon = async () => {
+    const [ name, img ] = await useFetchPokemon(enteredValue);
+    setName(name)
 }
 
 let confirmedOutput;
@@ -57,7 +67,7 @@ if(confirmed){
                 autoCapitalize='none'
                 autoCorrect={false}
                 keyboardType="number-pad"
-                maxLength={2}
+                maxLength={3}
                 onChangeText={numberInputHandler}
                 value={enteredValue}
                 />
@@ -79,6 +89,7 @@ if(confirmed){
             </View>
         </Card>
         {confirmedOutput}
+        {name}
     </View>
   )
 }
