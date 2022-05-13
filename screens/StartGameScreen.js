@@ -53,6 +53,7 @@ if(confirmed){
             title='Ready to start game?'
             onPress={ () => onStartGame(selectedNumber) }
         />
+        <Text>{name}</Text>
     </Card>
     )
 }
@@ -89,7 +90,6 @@ if(confirmed){
             </View>
         </Card>
         {confirmedOutput}
-        {name}
     </View>
   )
 }
