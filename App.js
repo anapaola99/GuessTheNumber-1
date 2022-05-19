@@ -29,7 +29,7 @@ export default function App() {
   if( selectedNumber && numberOfGuesses === 0 ) {
     content = <GameScreen selectedNumber={selectedNumber} onGameOver = {gameOverHandler} />;
   }else if (selectedNumber && numberOfGuesses > 0 ) {
-    content = <GameOverScreen rounds = {numberOfGuesses} onGameRestart={restartGame}/>
+    content = <GameOverScreen rounds = {numberOfGuesses} number={selectedNumber} onGameRestart={restartGame}/>
   }
 
   return (

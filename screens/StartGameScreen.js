@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button} from 'react-native';
 
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     input:{
         width: 50,
         textAlign: 'center'
-    }
+    },
   });
 
 export default StartGameScreen;
